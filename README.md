@@ -1,95 +1,153 @@
-# SupplyMaven MCP Server
+# MCP Registry
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server providing real-time supply chain intelligence data. Connect any MCP-compatible AI client (Claude Desktop, Cursor, Windsurf, etc.) to access global supply chain risk scores, manufacturing indexes, commodity prices, port congestion, and disruption alerts.
+The MCP registry provides MCP clients with a list of MCP servers, like an app store for MCP servers.
 
-## Available Tools
+[**📤 Publish my MCP server**](docs/modelcontextprotocol-io/quickstart.mdx) | [**⚡️ Live API docs**](https://registry.modelcontextprotocol.io/docs) | [**👀 Ecosystem vision**](docs/design/ecosystem-vision.md) | 📖 **[Full documentation](./docs)**
 
-| Tool | Description | Free Tier | Paid Tier |
-|------|-------------|-----------|-----------|
-| `get_supply_chain_risk` | Global Disruption Index (GDI) — composite 0-100 supply chain risk score | Rounded, 24h delayed | Real-time, precise |
-| `get_pillar_scores` | Breakdown by Energy (25%), Materials (25%), Transportation (30%), Macro (20%) | — | Full detail + news boosts |
-| `get_manufacturing_index` | Supply Maven Manufacturing Index (SMI) — weather-adjusted electricity demand indicator | Rounded, national only | Precise + 8 regional scores |
-| `get_commodity_prices` | Latest commodity prices with change percentages | 5 key commodities | All tracked commodities |
-| `get_port_congestion` | Port congestion scores, vessel counts, and stationary ratios for 30+ global ports | — | Full access |
-| `get_disruption_alerts` | AI-enriched supply chain news alerts with risk scoring | CRITICAL only | All severities |
+## Development Status
 
-## Quick Start
+**2025-10-24 update**: The Registry API has entered an **API freeze (v0.1)** 🎉. For the next month or more, the API will remain stable with no breaking changes, allowing integrators to confidently implement support. This freeze applies to v0.1 while development continues on v0. We'll use this period to validate the API in real-world integrations and gather feedback to shape v1 for general availability. Thank you to everyone for your contributions and patience—your involvement has been key to getting us here!
 
-### 1. Get an API Key
+**2025-09-08 update**: The registry has launched in preview 🎉 ([announcement blog post](https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/)). While the system is now more stable, this is still a preview release and breaking changes or data resets may occur. A general availability (GA) release will follow later. We'd love your feedback in [GitHub discussions](https://github.com/modelcontextprotocol/registry/discussions/new?category=ideas) or in the [#registry-dev Discord](https://discord.com/channels/1358869848138059966/1369487942862504016) ([joining details here](https://modelcontextprotocol.io/community/communication)).
 
-Get a free API key instantly (no credit card required):
+Current key maintainers:
+- **Adam Jones** (Anthropic) [@domdomegg](https://github.com/domdomegg)  
+- **Tadas Antanavicius** (PulseMCP) [@tadasant](https://github.com/tadasant)
+- **Toby Padilla** (GitHub) [@toby](https://github.com/toby)
+- **Radoslav (Rado) Dimitrov** (Stacklok) [@rdimitrov](https://github.com/rdimitrov)
 
-**[supplymaven.com/developers](https://supplymaven.com/developers)**
+## Contributing
 
-### 2. Configure Your MCP Client
+We use multiple channels for collaboration - see [modelcontextprotocol.io/community/communication](https://modelcontextprotocol.io/community/communication).
 
-Add the following to your MCP client configuration:
+Often (but not always) ideas flow through this pipeline:
 
-#### Claude Desktop
+- **[Discord](https://modelcontextprotocol.io/community/communication)** - Real-time community discussions
+- **[Discussions](https://github.com/modelcontextprotocol/registry/discussions)** - Propose and discuss product/technical requirements
+- **[Issues](https://github.com/modelcontextprotocol/registry/issues)** - Track well-scoped technical work  
+- **[Pull Requests](https://github.com/modelcontextprotocol/registry/pulls)** - Contribute work towards issues
 
-Add to your `claude_desktop_config.json`:
+### Quick start:
 
-```json
-{
-  "mcpServers": {
-    "supplymaven": {
-      "url": "https://supplymaven.com/api/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
-      }
-    }
-  }
-}
+#### Pre-requisites
+
+- **Docker**
+- **Go 1.24.x**
+- **ko** - Container image builder for Go ([installation instructions](https://ko.build/install/))
+- **golangci-lint v2.4.0**
+
+#### Running the server
+
+```bash
+# Start full development environment
+make dev-compose
 ```
 
-#### Cursor / Windsurf / Other MCP Clients
+This starts the registry at [`localhost:8080`](http://localhost:8080) with PostgreSQL. The database uses ephemeral storage and is reset each time you restart the containers, ensuring a clean state for development and testing.
 
-Use the Streamable HTTP transport:
+**Note:** The registry uses [ko](https://ko.build) to build container images. The `make dev-compose` command automatically builds the registry image with ko and loads it into your local Docker daemon before starting the services.
 
-- **URL:** `https://supplymaven.com/api/mcp`
-- **Method:** POST
-- **Header:** `Authorization: Bearer YOUR_API_KEY`
+By default, the registry seeds from the production API with a filtered subset of servers (to keep startup fast). This ensures your local environment mirrors production behavior and all seed data passes validation. For offline development you can seed from a file without validation with `MCP_REGISTRY_SEED_FROM=data/seed.json MCP_REGISTRY_ENABLE_REGISTRY_VALIDATION=false make dev-compose`.
 
-### 3. Start Using It
+The setup can be configured with environment variables in [docker-compose.yml](./docker-compose.yml) - see [.env.example](./.env.example) for a reference.
 
-Once connected, your AI assistant can call any of the tools above. Example prompts:
+<details>
+<summary>Alternative: Running a pre-built Docker image</summary>
 
-- *"What's the current supply chain risk level?"*
-- *"Show me commodity prices"*
-- *"Are there any disruption alerts I should know about?"*
-- *"What's the manufacturing index showing?"*
-- *"How congested are major ports right now?"*
+Pre-built Docker images are automatically published to GitHub Container Registry:
 
-## API Tiers
+```bash
+# Run latest stable release
+docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:latest
 
-| Tier | Rate Limit | Access | Price |
-|------|-----------|--------|-------|
-| **Free** | 100 requests/day | Limited data (rounded, delayed, subset) | Free |
-| **API Pro** | 10,000 requests/day | Full real-time data, all tools | $499/mo |
-| **Bundle** | 25,000 requests/day | Full data + dashboard access | $699/mo |
+# Run latest from main branch (continuous deployment)
+docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main
 
-Get your key at [supplymaven.com/developers](https://supplymaven.com/developers)
+# Run specific release version
+docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:v1.0.0
 
-## Data Sources
+# Run development build from main branch
+docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main-20250906-abc123d
+```
 
-SupplyMaven aggregates data from:
+**Available tags:** 
+- **Releases**: `latest`, `v1.0.0`, `v1.1.0`, etc.
+- **Continuous**: `main` (latest main branch build)
+- **Development**: `main-<date>-<sha>` (specific commit builds)
 
-- **Energy:** EIA electricity demand, crude oil, natural gas, refining margins
-- **Materials:** 25+ commodity prices (metals, semiconductors, chemicals, agricultural)
-- **Transportation:** 30+ major port vessel scans, border wait times, freight indexes
-- **Macro:** FRED economic indicators (VIX, PPI, employment, production)
-- **Manufacturing:** Proprietary weather-adjusted electricity demand analysis across 8 US grid regions
-- **News:** AI-enriched supply chain news from global sources
+</details>
 
-## About SupplyMaven
+#### Publishing a server
 
-SupplyMaven provides real-time supply chain risk intelligence for procurement teams, supply chain managers, and financial analysts. Our proprietary Global Disruption Index (GDI) and Supply Maven Manufacturing Index (SMI) offer early-warning signals for supply chain disruptions.
+To publish a server, we've built a simple CLI. You can use it with:
 
-- **Website:** [supplymaven.com](https://supplymaven.com)
-- **Dashboard:** [supplymaven.com/dashboard](https://supplymaven.com/dashboard)
-- **API Docs:** [supplymaven.com/developers](https://supplymaven.com/developers)
-- **Contact:** support@supplymaven.com
+```bash
+# Build the latest CLI
+make publisher
 
-## License
+# Use it!
+./bin/mcp-publisher --help
+```
 
-This MCP server configuration and documentation is provided under the [MIT License](LICENSE). The SupplyMaven API and data are subject to [SupplyMaven Terms of Service](https://supplymaven.com/terms).
+See [the publisher guide](./docs/modelcontextprotocol-io/quickstart.mdx) for more details.
+
+#### Other commands
+
+```bash
+# Run lint, unit tests and integration tests
+make check
+```
+
+There are also a few more helpful commands for development. Run `make help` to learn more, or look in [Makefile](./Makefile).
+
+<!--
+For Claude and other AI tools: Always prefer make targets over custom commands where possible.
+-->
+
+## Architecture
+
+### Project Structure
+
+```
+├── cmd/                     # Application entry points
+│   └── publisher/           # Server publishing tool
+├── data/                    # Seed data
+├── deploy/                  # Deployment configuration (Pulumi)
+├── docs/                    # Documentation
+├── internal/                # Private application code
+│   ├── api/                 # HTTP handlers and routing
+│   ├── auth/                # Authentication (GitHub OAuth, JWT, namespace blocking)
+│   ├── config/              # Configuration management
+│   ├── database/            # Data persistence (PostgreSQL)
+│   ├── service/             # Business logic
+│   ├── telemetry/           # Metrics and monitoring
+│   └── validators/          # Input validation
+├── pkg/                     # Public packages
+│   ├── api/                 # API types and structures
+│   │   └── v0/              # Version 0 API types
+│   └── model/               # Data models for server.json
+├── scripts/                 # Development and testing scripts
+├── tests/                   # Integration tests
+└── tools/                   # CLI tools and utilities
+    └── validate-*.sh        # Schema validation tools
+```
+
+### Authentication
+
+Publishing supports multiple authentication methods:
+- **GitHub OAuth** - For publishing by logging into GitHub
+- **GitHub OIDC** - For publishing from GitHub Actions
+- **DNS verification** - For proving ownership of a domain and its subdomains
+- **HTTP verification** - For proving ownership of a domain
+
+The registry validates namespace ownership when publishing. E.g. to publish...:
+- `io.github.domdomegg/my-cool-mcp` you must login to GitHub as `domdomegg`, or be in a GitHub Action on domdomegg's repos
+- `me.adamjones/my-cool-mcp` you must prove ownership of `adamjones.me` via DNS or HTTP challenge
+
+## Community Projects
+
+Check out [community projects](docs/community-projects.md) to explore notable registry-related work created by the community.
+
+## More documentation
+
+See the [documentation](./docs) for more details if your question has not been answered here!

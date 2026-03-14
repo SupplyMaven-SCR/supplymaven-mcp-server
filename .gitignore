@@ -1,3 +1,6 @@
 node_modules/
 .env*
 .DS_Store
+.mcpregistry_*
+mcp-publisher.exe
+mcp-publisher.tar.gz
