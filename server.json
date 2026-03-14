@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.supplymaven-scr/supply-chain-intelligence",
+  "title": "SupplyMaven Supply Chain Intelligence",
+  "description": "Real-time supply chain risk intelligence — Global Disruption Index, Manufacturing Index, commodity prices, port congestion, and disruption alerts. 6 tools covering energy, materials, transportation, and macro risk pillars.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/SupplyMaven-SCR/supplymaven-mcp-server",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://supplymaven.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer token with your SupplyMaven API key (get a free key at supplymaven.com/developers)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
