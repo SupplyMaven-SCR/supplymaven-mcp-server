@@ -1,153 +1,178 @@
-# MCP Registry
+# SupplyMaven MCP Server
 
-The MCP registry provides MCP clients with a list of MCP servers, like an app store for MCP servers.
+**The only MCP server for real-time supply chain risk intelligence.**
 
-[**📤 Publish my MCP server**](docs/modelcontextprotocol-io/quickstart.mdx) | [**⚡️ Live API docs**](https://registry.modelcontextprotocol.io/docs) | [**👀 Ecosystem vision**](docs/design/ecosystem-vision.md) | 📖 **[Full documentation](./docs)**
+Track 31 commodities, 26 global ports, 8 US energy grid regions, and border crossings — with proprietary risk indices that replace enterprise platforms costing $100K+/year.
 
-## Development Status
+`https://supplymaven.com/api/mcp`
 
-**2025-10-24 update**: The Registry API has entered an **API freeze (v0.1)** 🎉. For the next month or more, the API will remain stable with no breaking changes, allowing integrators to confidently implement support. This freeze applies to v0.1 while development continues on v0. We'll use this period to validate the API in real-world integrations and gather feedback to shape v1 for general availability. Thank you to everyone for your contributions and patience—your involvement has been key to getting us here!
+---
 
-**2025-09-08 update**: The registry has launched in preview 🎉 ([announcement blog post](https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/)). While the system is now more stable, this is still a preview release and breaking changes or data resets may occur. A general availability (GA) release will follow later. We'd love your feedback in [GitHub discussions](https://github.com/modelcontextprotocol/registry/discussions/new?category=ideas) or in the [#registry-dev Discord](https://discord.com/channels/1358869848138059966/1369487942862504016) ([joining details here](https://modelcontextprotocol.io/community/communication)).
+## Connect in 30 Seconds
 
-Current key maintainers:
-- **Adam Jones** (Anthropic) [@domdomegg](https://github.com/domdomegg)  
-- **Tadas Antanavicius** (PulseMCP) [@tadasant](https://github.com/tadasant)
-- **Toby Padilla** (GitHub) [@toby](https://github.com/toby)
-- **Radoslav (Rado) Dimitrov** (Stacklok) [@rdimitrov](https://github.com/rdimitrov)
+### Claude Desktop
 
-## Contributing
+Add to your `claude_desktop_config.json`:
 
-We use multiple channels for collaboration - see [modelcontextprotocol.io/community/communication](https://modelcontextprotocol.io/community/communication).
-
-Often (but not always) ideas flow through this pipeline:
-
-- **[Discord](https://modelcontextprotocol.io/community/communication)** - Real-time community discussions
-- **[Discussions](https://github.com/modelcontextprotocol/registry/discussions)** - Propose and discuss product/technical requirements
-- **[Issues](https://github.com/modelcontextprotocol/registry/issues)** - Track well-scoped technical work  
-- **[Pull Requests](https://github.com/modelcontextprotocol/registry/pulls)** - Contribute work towards issues
-
-### Quick start:
-
-#### Pre-requisites
-
-- **Docker**
-- **Go 1.24.x**
-- **ko** - Container image builder for Go ([installation instructions](https://ko.build/install/))
-- **golangci-lint v2.4.0**
-
-#### Running the server
-
-```bash
-# Start full development environment
-make dev-compose
+```json
+{
+  "mcpServers": {
+    "supplymaven": {
+      "type": "http",
+      "url": "https://supplymaven.com/api/mcp"
+    }
+  }
+}
 ```
 
-This starts the registry at [`localhost:8080`](http://localhost:8080) with PostgreSQL. The database uses ephemeral storage and is reset each time you restart the containers, ensuring a clean state for development and testing.
+### Cursor / VS Code
 
-**Note:** The registry uses [ko](https://ko.build) to build container images. The `make dev-compose` command automatically builds the registry image with ko and loads it into your local Docker daemon before starting the services.
+Add to your MCP settings:
 
-By default, the registry seeds from the production API with a filtered subset of servers (to keep startup fast). This ensures your local environment mirrors production behavior and all seed data passes validation. For offline development you can seed from a file without validation with `MCP_REGISTRY_SEED_FROM=data/seed.json MCP_REGISTRY_ENABLE_REGISTRY_VALIDATION=false make dev-compose`.
-
-The setup can be configured with environment variables in [docker-compose.yml](./docker-compose.yml) - see [.env.example](./.env.example) for a reference.
-
-<details>
-<summary>Alternative: Running a pre-built Docker image</summary>
-
-Pre-built Docker images are automatically published to GitHub Container Registry:
-
-```bash
-# Run latest stable release
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:latest
-
-# Run latest from main branch (continuous deployment)
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main
-
-# Run specific release version
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:v1.0.0
-
-# Run development build from main branch
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main-20250906-abc123d
+```json
+{
+  "mcpServers": {
+    "supplymaven": {
+      "type": "http",
+      "url": "https://supplymaven.com/api/mcp"
+    }
+  }
+}
 ```
 
-**Available tags:** 
-- **Releases**: `latest`, `v1.0.0`, `v1.1.0`, etc.
-- **Continuous**: `main` (latest main branch build)
-- **Development**: `main-<date>-<sha>` (specific commit builds)
+### Any MCP Client
 
-</details>
+**Endpoint:** `https://supplymaven.com/api/mcp`  
+**Transport:** Streamable HTTP  
+**Auth (free tier):** None required  
 
-#### Publishing a server
+---
 
-To publish a server, we've built a simple CLI. You can use it with:
+## What You Get
 
-```bash
-# Build the latest CLI
-make publisher
+### Free Tier — No API key, no signup, start querying now
 
-# Use it!
-./bin/mcp-publisher --help
+| Tool | Description |
+|------|-------------|
+| `get_supply_chain_risk` | **Global Disruption Index (GDI)** — A 0-100 composite score of supply chain risk combining Transportation (30%), Energy (25%), Materials (25%), and Macro (20%) signals |
+| `get_commodity_prices` | Real-time prices for 5 key commodities across agriculture, metals, and energy |
+| `get_disruption_alerts` | Supply chain disruption alerts from news intelligence (CRITICAL severity) |
+
+### Paid Tier — $499/month · 10,000 queries/day
+
+| Tool | Description |
+|------|-------------|
+| `get_manufacturing_index` | **Supply Maven Manufacturing Index (SMI)** — Patent-pending weather-adjusted electricity demand indicator that detects US manufacturing output changes up to 24 hours before government reports, across 8 power grid regions. Inverted scale: 0-35 = Strong, 36-50 = Normal, 51-65 = Below Trend, 66+ = Weak |
+| `get_pillar_scores` | Individual GDI pillar scores for Energy, Materials, Transportation, and Macro |
+| `get_port_congestion` | Vessel counts, congestion scores, and stationary vessel ratios for 26 major global ports |
+| `get_commodity_prices` | Full access to all 31 tracked commodities |
+| `get_disruption_alerts` | All severity levels (Critical, High, Medium, Low) |
+
+---
+
+## Example: Ask Claude About Supply Chain Risk
+
+**You:** "What's the current global supply chain risk level?"
+
+**Claude calls** `get_supply_chain_risk` **and responds with:**
+
+```json
+{
+  "gdi_score": 42,
+  "risk_level": "MODERATE",
+  "pillars": {
+    "transportation": 51,
+    "energy": 38,
+    "materials": 44,
+    "macro": 29
+  },
+  "summary": "Elevated transportation risk driven by port congestion at Long Beach and Houston. Energy and materials within normal range. Macro indicators stable.",
+  "updated_at": "2026-03-21T14:30:00Z"
+}
 ```
 
-See [the publisher guide](./docs/modelcontextprotocol-io/quickstart.mdx) for more details.
+**You:** "What are commodity prices doing right now?"
 
-#### Other commands
+**Claude calls** `get_commodity_prices` **and responds with:**
 
-```bash
-# Run lint, unit tests and integration tests
-make check
+```json
+{
+  "commodities": [
+    { "name": "Crude Oil (WTI)", "price": 68.42, "unit": "USD/barrel", "change_24h": -1.2 },
+    { "name": "Coffee (Arabica)", "price": 2.34, "unit": "USD/lb", "change_24h": 3.1 },
+    { "name": "Copper", "price": 4.12, "unit": "USD/lb", "change_24h": 0.8 },
+    { "name": "Wheat", "price": 5.67, "unit": "USD/bushel", "change_24h": -0.4 },
+    { "name": "Natural Gas", "price": 2.89, "unit": "USD/MMBtu", "change_24h": 2.3 }
+  ],
+  "updated_at": "2026-03-21T14:30:00Z"
+}
 ```
 
-There are also a few more helpful commands for development. Run `make help` to learn more, or look in [Makefile](./Makefile).
+---
 
-<!--
-For Claude and other AI tools: Always prefer make targets over custom commands where possible.
--->
+## Use Cases
 
-## Architecture
+**Procurement Copilots** — Give your AI agent real-time commodity price awareness and risk context for sourcing decisions
 
-### Project Structure
+**Logistics Routing Agents** — Feed port congestion and border delay data into route optimization workflows
 
-```
-├── cmd/                     # Application entry points
-│   └── publisher/           # Server publishing tool
-├── data/                    # Seed data
-├── deploy/                  # Deployment configuration (Pulumi)
-├── docs/                    # Documentation
-├── internal/                # Private application code
-│   ├── api/                 # HTTP handlers and routing
-│   ├── auth/                # Authentication (GitHub OAuth, JWT, namespace blocking)
-│   ├── config/              # Configuration management
-│   ├── database/            # Data persistence (PostgreSQL)
-│   ├── service/             # Business logic
-│   ├── telemetry/           # Metrics and monitoring
-│   └── validators/          # Input validation
-├── pkg/                     # Public packages
-│   ├── api/                 # API types and structures
-│   │   └── v0/              # Version 0 API types
-│   └── model/               # Data models for server.json
-├── scripts/                 # Development and testing scripts
-├── tests/                   # Integration tests
-└── tools/                   # CLI tools and utilities
-    └── validate-*.sh        # Schema validation tools
-```
+**Trading & Risk Systems** — Use the SMI as a leading indicator of manufacturing activity before government reports
 
-### Authentication
+**Supply Chain Dashboards** — Pull live GDI scores and disruption alerts into any AI-powered monitoring tool
 
-Publishing supports multiple authentication methods:
-- **GitHub OAuth** - For publishing by logging into GitHub
-- **GitHub OIDC** - For publishing from GitHub Actions
-- **DNS verification** - For proving ownership of a domain and its subdomains
-- **HTTP verification** - For proving ownership of a domain
+**Consulting & Advisory** — Equip client-facing AI tools with real-time supply chain intelligence
 
-The registry validates namespace ownership when publishing. E.g. to publish...:
-- `io.github.domdomegg/my-cool-mcp` you must login to GitHub as `domdomegg`, or be in a GitHub Action on domdomegg's repos
-- `me.adamjones/my-cool-mcp` you must prove ownership of `adamjones.me` via DNS or HTTP challenge
+---
 
-## Community Projects
+## Data Coverage
 
-Check out [community projects](docs/community-projects.md) to explore notable registry-related work created by the community.
+**31 Commodities** — Agriculture (coffee, wheat, corn, soybeans, sugar, cocoa, cotton, rice), Metals (copper, aluminum, zinc, nickel, lead, tin, steel, gold, silver, platinum, palladium, iron ore, lithium, cobalt), Energy (crude oil WTI, crude oil Brent, natural gas, gasoline, heating oil)
 
-## More documentation
+**26 Global Ports** — Los Angeles, Long Beach, Houston, Savannah, New York/New Jersey, Charleston, Oakland, Seattle, Tacoma, Norfolk, and 16 international ports
 
-See the [documentation](./docs) for more details if your question has not been answered here!
+**8 US Energy Grid Regions** — Real-time electricity demand from EIA-930 balancing authorities
+
+**US Border Crossings** — Wait times at US-Mexico and US-Canada commercial crossings
+
+**Macroeconomic Indicators** — PPI, FRED economic data, and Federal Reserve signals
+
+---
+
+## Proprietary Indices
+
+### Global Disruption Index (GDI)
+A 0-100 composite score quantifying overall supply chain disruption risk. Combines four weighted pillars — Transportation (30%), Energy (25%), Materials (25%), Macro (20%) — each scored individually and updated in near-real-time. Higher values indicate greater disruption risk.
+
+### Supply Maven Manufacturing Index (SMI)
+A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. The SMI detects manufacturing output changes up to 24 hours before official government reports. Uses the formula NMS = RMD × (1 - ((CDD × α) + (HDD × β))) to remove weather noise from industrial energy consumption signals.
+
+---
+
+## Pricing
+
+| Plan | Price | Queries/Day | Tools |
+|------|-------|-------------|-------|
+| Free | $0 | Unlimited | `get_supply_chain_risk`, `get_commodity_prices` (5), `get_disruption_alerts` (critical) |
+| Professional | $499/month | 10,000 | All 6 tools, all commodities, all severity levels |
+
+---
+
+## Links
+
+- **Dashboard:** [supplymaven.com](https://supplymaven.com)
+- **About & Methodology:** [supplymaven.com/about](https://supplymaven.com/about)
+- **MCP Endpoint:** `https://supplymaven.com/api/mcp`
+- **Glama Listing:** [glama.ai/mcp/connectors/com.supplymaven](https://glama.ai/mcp/connectors/com.supplymaven/supply-maven-mcp-server)
+- **MCP Marketplace:** [mcp-marketplace.io/server/supplymaven-mcp-server](https://mcp-marketplace.io/server/supplymaven-mcp-server)
+
+---
+
+## About
+
+SupplyMaven is built by [Eos Group, LLC](https://supplymaven.com), a Washington State S-Corporation. The platform monitors over 200 data variables in real time, sourced from government agencies (EIA, USDA, CBP, BLS, Federal Reserve), commodity markets, port tracking systems (AIS), and news intelligence feeds.
+
+**Contact:** [supplymaven.com](https://supplymaven.com)
+
+---
+
+*SupplyMaven — Enterprise-grade supply chain intelligence at startup speed.*
