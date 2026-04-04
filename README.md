@@ -66,7 +66,7 @@ const client = await experimental_createMCPClient({
 });
 
 const tools = await client.tools();
-// 11 supply chain intelligence tools ready
+// 15 supply chain intelligence tools ready
 ```
 
 ### Any MCP Client
@@ -78,7 +78,7 @@ const tools = await client.tools();
 
 ---
 
-## Available Tools (11)
+## Available Tools (15)
 
 ### Free Tier — No credit card, get a key instantly
 
@@ -100,6 +100,10 @@ const tools = await client.tools();
 | `get_chokepoint_traffic` | Maritime chokepoint vessel traffic — Suez Canal, Panama Canal, Strait of Malacca, Strait of Hormuz, and other strategic waterways. |
 | `get_air_cargo_disruptions` | Air cargo disruption status at 39 US and international airports. FAA ground delays, ground stops, disruption scores, and traffic collapse detection. |
 | `get_trade_policy_impacts` | Active tariffs, sanctions, export controls, and policy changes impacting supply chain risk. Persists beyond news cycle — shows ongoing GDI score impact. |
+| `get_energy_breakdown` | Disaggregated US energy market data — crude oil, natural gas, retail fuel, refinery utilization, storage levels, and petroleum trade flows. |
+| `get_rail_freight_status` | US freight rail performance — train speed, terminal dwell time, carloadings, intermodal units, and grain transport rates from STB/AAR/USDA. |
+| `get_freight_transportation_index` | BTS Transportation Services Index, truck tonnage, rail carloadings, rail intermodal, waterborne freight, and inventory-to-sales ratio. |
+| `get_economic_indicators` | FRED economic data, Producer Price Index, NY Fed Global Supply Chain Pressure Index, and EIA STEO energy forecasts. |
 
 ---
 
@@ -202,7 +206,10 @@ Data provided by SupplyMaven | supplymaven.com/validation
 - **39 Airports** — Major US and international cargo hubs with FAA status
 - **8 US Energy Grid Regions** — Real-time electricity demand from EIA
 - **Trade Policy Tracking** — Active tariffs, sanctions, and export controls
-- **Macroeconomic Indicators** — FRED, PPI, Global Supply Chain Pressure Index
+- **US Freight Rail** — Train speed, dwell time, carloadings, intermodal from STB/AAR
+- **Freight Transportation Index** — BTS TSI, truck tonnage, waterborne freight
+- **Energy Market Data** — Crude, natural gas, retail fuel, refinery, storage, trade flows
+- **Macroeconomic Indicators** — FRED, PPI, Global Supply Chain Pressure Index, EIA STEO forecasts
 
 ---
 
@@ -224,7 +231,7 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 | Plan | Price | Queries/Day | Tools |
 |------|-------|-------------|-------|
 | Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
-| API Pro | $499/month | 10,000 | All 11 tools, all data, full resolution |
+| API Pro | $499/month | 10,000 | All 15 tools, all data, full resolution |
 | Bundle | $699/month | 25,000 | All tools + Dashboard access |
 
 Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
