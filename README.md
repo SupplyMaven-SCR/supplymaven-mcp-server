@@ -1,150 +1,221 @@
 # SupplyMaven MCP Server
 
-**The only MCP server for real-time supply chain risk intelligence.**
+**Real-time supply chain risk intelligence for AI agents.** The only MCP server providing live supply chain disruption data, proprietary risk indices, and validated predictive signals.
 
-Track 31 commodities, 26 global ports, 8 US energy grid regions, and border crossings — with proprietary risk indices that replace enterprise platforms costing $100K+/year.
+Track 31 commodities, 26 global ports, 80+ border crossings, maritime chokepoints, air cargo hubs, and trade policy impacts — with proprietary indices that replace enterprise supply chain visibility platforms costing $100K+/year.
 
 `https://supplymaven.com/api/mcp`
+
+**Keywords:** supply chain risk management tools, agentic AI for supply chain, real-time supply chain visibility, supply chain disruption monitoring, supply chain risk intelligence, automated supply chain monitoring, supply chain visibility platform, supplier risk monitoring, SCM software, leading manufacturing indicator
 
 ---
 
 ## Connect in 30 Seconds
 
-### Claude Desktop
+### Claude Desktop / Claude Code
 
-Add to your `claude_desktop_config.json`:
+Add to your MCP server configuration:
 
 ```json
 {
   "mcpServers": {
     "supplymaven": {
-      "type": "http",
-      "url": "https://supplymaven.com/api/mcp"
+      "url": "https://supplymaven.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer sm_free_your_key_here"
+      }
     }
   }
 }
+```
+
+### ChatGPT / OpenAI Agents
+
+```
+Endpoint: https://supplymaven.com/api/mcp
+Transport: Streamable HTTP
+Auth: Bearer sm_free_your_key_here
 ```
 
 ### Cursor / VS Code
 
-Add to your MCP settings:
-
 ```json
 {
   "mcpServers": {
     "supplymaven": {
       "type": "http",
-      "url": "https://supplymaven.com/api/mcp"
+      "url": "https://supplymaven.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer sm_free_your_key_here"
+      }
     }
   }
 }
 ```
 
-### Any MCP Client
+### Programmatic (Vercel AI SDK, LangChain, CrewAI)
 
-**Endpoint:** `https://supplymaven.com/api/mcp`  
-**Transport:** Streamable HTTP  
-**Auth (free tier):** None required  
+```javascript
+import { experimental_createMCPClient } from "ai";
 
----
+const client = await experimental_createMCPClient({
+  transport: {
+    type: "sse",
+    url: "https://supplymaven.com/api/mcp",
+  }
+});
 
-## What You Get
-
-### Free Tier — No API key, no signup, start querying now
-
-| Tool | Description |
-|------|-------------|
-| `get_supply_chain_risk` | **Global Disruption Index (GDI)** — A 0-100 composite score of supply chain risk combining Transportation (30%), Energy (25%), Materials (25%), and Macro (20%) signals |
-| `get_commodity_prices` | Real-time prices for 5 key commodities across agriculture, metals, and energy |
-| `get_disruption_alerts` | Supply chain disruption alerts from news intelligence (CRITICAL severity) |
-
-### Paid Tier — $499/month · 10,000 queries/day
-
-| Tool | Description |
-|------|-------------|
-| `get_manufacturing_index` | **Supply Maven Manufacturing Index (SMI)** — Patent-pending weather-adjusted electricity demand indicator that detects US manufacturing output changes up to 24 hours before government reports, across 8 power grid regions. Inverted scale: 0-35 = Strong, 36-50 = Normal, 51-65 = Below Trend, 66+ = Weak |
-| `get_pillar_scores` | Individual GDI pillar scores for Energy, Materials, Transportation, and Macro |
-| `get_port_congestion` | Vessel counts, congestion scores, and stationary vessel ratios for 26 major global ports |
-| `get_commodity_prices` | Full access to all 31 tracked commodities |
-| `get_disruption_alerts` | All severity levels (Critical, High, Medium, Low) |
-
----
-
-## Example: Ask Claude About Supply Chain Risk
-
-**You:** "What's the current global supply chain risk level?"
-
-**Claude calls** `get_supply_chain_risk` **and responds with:**
-
-```json
-{
-  "gdi_score": 42,
-  "risk_level": "MODERATE",
-  "pillars": {
-    "transportation": 51,
-    "energy": 38,
-    "materials": 44,
-    "macro": 29
-  },
-  "summary": "Elevated transportation risk driven by port congestion at Long Beach and Houston. Energy and materials within normal range. Macro indicators stable.",
-  "updated_at": "2026-03-21T14:30:00Z"
-}
+const tools = await client.tools();
+// 11 supply chain intelligence tools ready
 ```
 
-**You:** "What are commodity prices doing right now?"
+### Any MCP Client
 
-**Claude calls** `get_commodity_prices` **and responds with:**
+**Endpoint:** `https://supplymaven.com/api/mcp`
+**Transport:** Streamable HTTP
+**Auth:** Bearer token (`sm_free_*` or `sm_live_*`)
+**Free tier:** Get a key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
-```json
-{
-  "commodities": [
-    { "name": "Crude Oil (WTI)", "price": 68.42, "unit": "USD/barrel", "change_24h": -1.2 },
-    { "name": "Coffee (Arabica)", "price": 2.34, "unit": "USD/lb", "change_24h": 3.1 },
-    { "name": "Copper", "price": 4.12, "unit": "USD/lb", "change_24h": 0.8 },
-    { "name": "Wheat", "price": 5.67, "unit": "USD/bushel", "change_24h": -0.4 },
-    { "name": "Natural Gas", "price": 2.89, "unit": "USD/MMBtu", "change_24h": 2.3 }
-  ],
-  "updated_at": "2026-03-21T14:30:00Z"
-}
+---
+
+## Available Tools (11)
+
+### Free Tier — No credit card, get a key instantly
+
+| Tool | Description |
+|------|-------------|
+| `supply_chain_risk_assessment` | **Global Disruption Index (GDI)** — 0-100 composite score of supply chain risk across Transportation (30%), Energy (25%), Materials (25%), and Macro (20%) pillars. Built from 200+ live data variables. |
+| `commodity_price_monitor` | Real-time prices for 31 commodities across energy, metals, agriculture, industrial, and semiconductor materials. Free tier: 5 key commodities. |
+| `supply_chain_disruption_alerts` | Real-time disruption alerts from global news intelligence — port closures, tariffs, sanctions, weather, labor strikes. Free tier: critical severity only. |
+
+### Pro Tier — $499/month - 10,000 queries/day
+
+| Tool | Description |
+|------|-------------|
+| `manufacturing_output_indicator` | **Supply Manufacturing Index (SMI)** — Patent-pending weather-adjusted electricity demand indicator. Detects US manufacturing output changes up to 24 hours before government reports across 8 power grid regions. Leading manufacturing indicator used by commodity traders and hedge funds. |
+| `risk_pillar_breakdown` | Individual GDI pillar scores for Transportation, Energy, Materials, and Macro with weights and news boost breakdown. |
+| `port_congestion_monitor` | Vessel counts, congestion scores, and port status at 26 major global ports across US, Asia, and Europe. |
+| `get_action_signals` | **Validated predictive signals** — Granger-causal leading indicators (p<=0.01) evaluated against live data. ACTIVE/WATCH/CLEAR status with directional accuracy and lag times. |
+| `get_border_delays` | Real-time US-Mexico and US-Canada commercial border crossing wait times. 80+ crossings updated every 30 minutes from CBP. |
+| `get_chokepoint_traffic` | Maritime chokepoint vessel traffic — Suez Canal, Panama Canal, Strait of Malacca, Strait of Hormuz, and other strategic waterways. |
+| `get_air_cargo_disruptions` | Air cargo disruption status at 39 US and international airports. FAA ground delays, ground stops, disruption scores, and traffic collapse detection. |
+| `get_trade_policy_impacts` | Active tariffs, sanctions, export controls, and policy changes impacting supply chain risk. Persists beyond news cycle — shows ongoing GDI score impact. |
+
+---
+
+## Example Responses
+
+### `supply_chain_risk_assessment`
+
+```
+Global Disruption Index: 58.4
+Data quality: GOOD
+Needs attention: true
+Last updated: 2026-04-04T14:30:00.000Z
+
+Data provided by SupplyMaven | supplymaven.com/validation
+```
+
+### `manufacturing_output_indicator`
+
+```
+Supply Maven Manufacturing Index (lower = stronger):
+  National: 44.2 — NORMAL
+
+Regional Breakdown:
+  MISO: 41.3 (NORMAL)
+  ERCO: 38.7 (NORMAL)
+  PJM: 52.1 (BELOW TREND)
+  SWPP: 40.5 (NORMAL)
+  CISO: 46.8 (NORMAL)
+  ISNE: 44.9 (NORMAL)
+  NYIS: 48.2 (NORMAL)
+  NW: 43.1 (NORMAL)
+
+Data provided by SupplyMaven | supplymaven.com/validation
+```
+
+### `get_action_signals`
+
+```
+Action Signals — 3 ACTIVE, 4 WATCH (7 total triggered):
+
+  [ACTIVE] Materials Stress -> WTI Crude Oil
+    GDI:Materials -> WTI Crude Oil | 1 week lead | 57% directional accuracy | current: 71 index | threshold: 65
+
+  [WATCH] Mid-Atlantic Manufacturing -> New Orders Lead
+    SMI:PJM (deterioration trigger) -> Manufacturing New Orders | 3 month lead | 78% directional accuracy | current: 63 SMI score | threshold: 66
+
+Signal statuses: ACTIVE = threshold crossed, act now. WATCH = approaching threshold, prepare.
+All signals validated via Granger causality (p<=0.01) with directional accuracy >=55%.
+
+Data provided by SupplyMaven | supplymaven.com/validation
+```
+
+### `get_border_delays`
+
+```
+Border Crossing Delays (81 crossings):
+  Laredo (mexico): commercial delay=45 min
+  El Paso (mexico): commercial delay=32 min
+  Otay Mesa (mexico): commercial delay=28 min
+  Detroit (canada): commercial delay=12 min
+  Buffalo (canada): commercial delay=8 min
+
+Avg delay: 22 min | High delay (>30min): 8 crossings | Critical (>60min): 2
+
+Data provided by SupplyMaven | supplymaven.com/validation
+```
+
+### `get_chokepoint_traffic`
+
+```
+Maritime Chokepoint Traffic (8 chokepoints, aggregate score: 42.5):
+  Suez Canal: score=62.4 level=ELEVATED vessels=47 slow=5 stationary=2 avg_speed=8.2kn
+  Panama Canal: score=51.3 level=ELEVATED vessels=32 slow=3 stationary=1 avg_speed=6.8kn
+  Strait of Malacca: score=45.1 level=NORMAL vessels=89 slow=8 stationary=3 avg_speed=10.4kn
+  Strait of Hormuz: score=38.7 level=NORMAL vessels=41 slow=2 stationary=0 avg_speed=11.1kn
+
+Data provided by SupplyMaven | supplymaven.com/validation
 ```
 
 ---
 
 ## Use Cases
 
-**Procurement Copilots** — Give your AI agent real-time commodity price awareness and risk context for sourcing decisions
+**Procurement AI Copilots** — Your users ask "should we accelerate this copper order?" With SupplyMaven, your agent checks live materials stress, port congestion, validated commodity signals, and GDI pillar scores before answering with a defensible recommendation.
 
-**Logistics Routing Agents** — Feed port congestion and border delay data into route optimization workflows
+**Trading and Quant Models** — Government manufacturing reports come out monthly. The SMI updates hourly from EIA electricity demand data — the same physical signal that precedes manufacturing shifts by 6-24 hours. Commodity price signals with validated Granger lag times tell you which market to watch and when.
 
-**Trading & Risk Systems** — Use the SMI as a leading indicator of manufacturing activity before government reports
+**Enterprise Risk Dashboards** — Embed live GDI scores, pillar breakdowns, and action signals in your internal tools. When the Transportation pillar spikes, the chatbot flags it before your logistics team sees the delay.
 
-**Supply Chain Dashboards** — Pull live GDI scores and disruption alerts into any AI-powered monitoring tool
-
-**Consulting & Advisory** — Equip client-facing AI tools with real-time supply chain intelligence
+**Logistics Routing Agents** — Feed port congestion, border delays, chokepoint traffic, and air cargo disruption data into route optimization workflows.
 
 ---
 
 ## Data Coverage
 
-**31 Commodities** — Agriculture (coffee, wheat, corn, soybeans, sugar, cocoa, cotton, rice), Metals (copper, aluminum, zinc, nickel, lead, tin, steel, gold, silver, platinum, palladium, iron ore, lithium, cobalt), Energy (crude oil WTI, crude oil Brent, natural gas, gasoline, heating oil)
-
-**26 Global Ports** — Los Angeles, Long Beach, Houston, Savannah, New York/New Jersey, Charleston, Oakland, Seattle, Tacoma, Norfolk, and 16 international ports
-
-**8 US Energy Grid Regions** — Real-time electricity demand from EIA-930 balancing authorities
-
-**US Border Crossings** — Wait times at US-Mexico and US-Canada commercial crossings
-
-**Macroeconomic Indicators** — PPI, FRED economic data, and Federal Reserve signals
+- **31 Commodities** — Energy, metals, agriculture, industrial materials, semiconductor materials
+- **26 Global Ports** — US (LA, Long Beach, Houston, Savannah, NY/NJ), Asia (Shanghai, Singapore, Busan), Europe (Rotterdam, Hamburg, Antwerp)
+- **80+ Border Crossings** — US-Mexico and US-Canada commercial wait times from CBP
+- **12 Maritime Chokepoints** — Suez, Panama, Malacca, Hormuz, Bab el-Mandeb, and more
+- **39 Airports** — Major US and international cargo hubs with FAA status
+- **8 US Energy Grid Regions** — Real-time electricity demand from EIA
+- **Trade Policy Tracking** — Active tariffs, sanctions, and export controls
+- **Macroeconomic Indicators** — FRED, PPI, Global Supply Chain Pressure Index
 
 ---
 
 ## Proprietary Indices
 
 ### Global Disruption Index (GDI)
-A 0-100 composite score quantifying overall supply chain disruption risk. Combines four weighted pillars — Transportation (30%), Energy (25%), Materials (25%), Macro (20%) — each scored individually and updated in near-real-time. Higher values indicate greater disruption risk.
+A 0-100 composite score quantifying overall supply chain disruption risk. Combines four weighted pillars — Transportation (30%), Energy (25%), Materials (25%), Macro (20%). Recalculates every 15 minutes. Higher = more risk.
 
 ### Supply Maven Manufacturing Index (SMI)
-A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. The SMI detects manufacturing output changes up to 24 hours before official government reports. Uses the formula NMS = RMD × (1 - ((CDD × α) + (HDD × β))) to remove weather noise from industrial energy consumption signals.
+A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. Detects manufacturing output changes up to 24 hours before official government reports. Formula: NMS = RMD x (1 - ((CDD x alpha) + (HDD x beta))). Validated against 9 FRED benchmarks with IPMAN correlation of +0.646.
+
+### Validated Predictive Signals
+36 Granger-causal signals tested at p<=0.01 with directional accuracy >=55%. Each signal has a known lag time (how far ahead it predicts) and is evaluated against live data every 15 minutes.
 
 ---
 
@@ -152,27 +223,26 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 
 | Plan | Price | Queries/Day | Tools |
 |------|-------|-------------|-------|
-| Free | $0 | Unlimited | `get_supply_chain_risk`, `get_commodity_prices` (5), `get_disruption_alerts` (critical) |
-| Professional | $499/month | 10,000 | All 6 tools, all commodities, all severity levels |
+| Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
+| API Pro | $499/month | 10,000 | All 11 tools, all data, full resolution |
+| Bundle | $699/month | 25,000 | All tools + Dashboard access |
+
+Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
 ---
 
 ## Links
 
-- **Dashboard:** [supplymaven.com](https://supplymaven.com)
-- **About & Methodology:** [supplymaven.com/about](https://supplymaven.com/about)
+- **Website:** [supplymaven.com](https://supplymaven.com)
+- **Developer Portal:** [supplymaven.com/developers](https://supplymaven.com/developers)
+- **API Documentation:** [supplymaven.com/developers/docs](https://supplymaven.com/developers/docs)
 - **MCP Endpoint:** `https://supplymaven.com/api/mcp`
-- **Glama Listing:** [glama.ai/mcp/connectors/com.supplymaven](https://glama.ai/mcp/connectors/com.supplymaven/supply-maven-mcp-server)
-- **MCP Marketplace:** [mcp-marketplace.io/server/supplymaven-mcp-server](https://mcp-marketplace.io/server/supplymaven-mcp-server)
+- **LLM Info:** [supplymaven.com/llms.txt](https://supplymaven.com/llms.txt)
 
 ---
 
 ## About
 
-SupplyMaven is built by [Eos Group, LLC](https://supplymaven.com), a Washington State S-Corporation. The platform monitors over 200 data variables in real time, sourced from government agencies (EIA, USDA, CBP, BLS, Federal Reserve), commodity markets, port tracking systems (AIS), and news intelligence feeds.
+SupplyMaven is built by [Eos Group, LLC](https://supplymaven.com). The platform monitors over 200 data variables in real time, sourced from government agencies (EIA, USDA, CBP, BLS, Federal Reserve, FAA, NOAA), commodity markets, global vessel tracking (AIS/Datalastic), and news intelligence feeds.
 
-**Contact:** [supplymaven.com](https://supplymaven.com)
-
----
-
-*SupplyMaven — Enterprise-grade supply chain intelligence at startup speed.*
+*SupplyMaven — Enterprise-grade supply chain intelligence for AI agents.*
