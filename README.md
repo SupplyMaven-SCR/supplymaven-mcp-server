@@ -66,7 +66,7 @@ const client = await experimental_createMCPClient({
 });
 
 const tools = await client.tools();
-// 15 supply chain intelligence tools ready
+// 24 supply chain intelligence tools ready
 ```
 
 ### Any MCP Client
@@ -78,7 +78,7 @@ const tools = await client.tools();
 
 ---
 
-## Available Tools (15)
+## Available Tools (24)
 
 ### Free Tier — No credit card, get a key instantly
 
@@ -88,7 +88,7 @@ const tools = await client.tools();
 | `commodity_price_monitor` | Real-time prices for 31 commodities across energy, metals, agriculture, industrial, and semiconductor materials. Free tier: 5 key commodities. |
 | `supply_chain_disruption_alerts` | Real-time disruption alerts from global news intelligence — port closures, tariffs, sanctions, weather, labor strikes. Free tier: critical severity only. |
 
-### Pro Tier — $499/month - 10,000 queries/day
+### Pro Tier — $499/month - 10,000 queries/day - includes Dashboard
 
 | Tool | Description |
 |------|-------------|
@@ -104,6 +104,20 @@ const tools = await client.tools();
 | `get_rail_freight_status` | US freight rail performance — train speed, terminal dwell time, carloadings, intermodal units, and grain transport rates from STB/AAR/USDA. |
 | `get_freight_transportation_index` | BTS Transportation Services Index, truck tonnage, rail carloadings, rail intermodal, waterborne freight, and inventory-to-sales ratio. |
 | `get_economic_indicators` | FRED economic data, Producer Price Index, NY Fed Global Supply Chain Pressure Index, and EIA STEO energy forecasts. |
+
+### Signal Tier — $999/month - 25,000 queries/day - includes everything in Pro
+
+| Tool | Description |
+|------|-------------|
+| `get_predictive_signals` | **58 Granger-causal leading indicators** with ACTIVE/WATCH/CLEAR status. Predicts commodity prices, manufacturing shifts, and macroeconomic changes 1 week to 6 months ahead. Filter by tier, status, or predictor group. |
+| `get_manufacturing_anomalies` | Electricity demand anomaly detection across 8 US grid regions. Patent-pending weather normalization isolates industrial demand. Current SMI score with regional breakdown plus 7-day anomaly history ranked by severity. |
+| `get_supply_chain_weekly_brief` | **Executive-level weekly situation report** combining GDI pillar scores, manufacturing output, port congestion, active predictive signals, top disruption events, and key takeaways in a single call. |
+| `get_signal_narratives` | Plain-language explanations of signal mechanisms and economic logic for each of the 58 predictive signals. Suitable for executive briefings, client reports, and AI agent reasoning chains. |
+| `get_energy_forecast` | EIA Short-Term Energy Outlook forward-looking projections — crude oil production, natural gas prices, electricity generation, renewable capacity, and more. Actual vs forecast comparison with 1,467 tracked series. |
+| `get_gdi_trend_analysis` | GDI risk direction, velocity, acceleration, and pillar-level momentum over 7/14/30/90-day windows. Detects regime changes and trend reversals before they show in the headline number. |
+| `get_commodity_volatility_alerts` | Abnormal commodity price movement detection across 31 commodities. Flags unusual 24-hour changes that may signal supply disruptions, demand shifts, or speculative activity. |
+| `get_port_congestion_trends` | Port congestion trajectory and acceleration versus historical baselines at 26 global ports. Direction of change matters more than point-in-time score. |
+| `get_intelligence_briefs` | AI-generated hourly analytical briefs per supply chain dimension — energy, materials, transportation, macro, and manufacturing. Cross-pillar awareness with anti-hallucination safeguards. |
 
 ---
 
@@ -222,7 +236,7 @@ A 0-100 composite score quantifying overall supply chain disruption risk. Combin
 A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. Detects manufacturing output changes up to 24 hours before official government reports. Formula: NMS = RMD x (1 - ((CDD x alpha) + (HDD x beta))). Validated against 9 FRED benchmarks with IPMAN correlation of +0.646.
 
 ### Validated Predictive Signals
-36 Granger-causal signals tested at p<=0.01 with directional accuracy >=55%. Each signal has a known lag time (how far ahead it predicts) and is evaluated against live data every 15 minutes.
+58 Granger-causal signals tested at p<=0.01 with directional accuracy >=55%. Each signal has a known lag time (how far ahead it predicts) and is evaluated against live data every 15 minutes. Organized in 3 tiers by statistical confidence.
 
 ---
 
@@ -231,8 +245,8 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 | Plan | Price | Queries/Day | Tools |
 |------|-------|-------------|-------|
 | Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
-| API Pro | $499/month | 10,000 | All 15 tools, all data, full resolution |
-| Bundle | $699/month | 25,000 | All tools + Dashboard access |
+| Pro | $499/month | 10,000 | 15 tools + Dashboard access, full-resolution data |
+| Signal | $999/month | 25,000 | All 24 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
 
 Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
