@@ -105,7 +105,7 @@ const tools = await client.tools();
 | `get_freight_transportation_index` | BTS Transportation Services Index, truck tonnage, rail carloadings, rail intermodal, waterborne freight, and inventory-to-sales ratio. |
 | `get_economic_indicators` | FRED economic data, Producer Price Index, NY Fed Global Supply Chain Pressure Index, and EIA STEO energy forecasts. |
 
-### Signal Tier — $999/month - 25,000 queries/day - includes everything in Pro
+### Signal Tier — Enterprise - 25,000 queries/day - includes everything in Pro
 
 | Tool | Description |
 |------|-------------|
@@ -246,7 +246,7 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 |------|-------|-------------|-------|
 | Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
 | Pro | $499/month | 10,000 | 15 tools + Dashboard access, full-resolution data |
-| Signal | $999/month | 25,000 | All 24 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
+| Signal | Enterprise | 25,000 | All 24 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
 
 Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
