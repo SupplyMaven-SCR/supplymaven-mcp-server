@@ -1,1 +1,163 @@
-{"$schema":"https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json","name":"io.github.SupplyMaven-SCR/supply-chain-intelligence","title":"SupplyMaven Supply Chain Intelligence","description":"Real-time supply chain risk intelligence MCP server. 24 tools covering Global Disruption Index, manufacturing output indicator, commodity prices, port congestion, border delays, maritime chokepoints, air cargo disruptions, trade policy impacts, energy market data, rail freight, freight transportation index, economic indicators, validated predictive signals, signal narratives, manufacturing anomaly detection, energy forecasts, GDI trend analysis, commodity volatility alerts, port congestion trends, AI intelligence briefs, and weekly executive supply chain reports. The only MCP server for supply chain risk management, real-time supply chain visibility, and agentic AI for supply chain workflows.","version":"4.0.0","repository":{"url":"https://github.com/SupplyMaven-SCR/supplymaven-mcp-server","source":"github"},"remotes":[{"type":"streamable-http","url":"https://supplymaven.com/api/mcp","headers":[{"name":"Authorization","description":"Bearer token with your SupplyMaven API key (get a free key at supplymaven.com/developers)","isRequired":true,"isSecret":true}]}]}
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.SupplyMaven-SCR/supply-chain-intelligence",
+  "title": "SupplyMaven Supply Chain Intelligence",
+  "description": "Real-time supply chain risk intelligence — 34 tools, proprietary indices, predictive signals",
+  "version": "4.0.1",
+  "repository": {
+    "url": "https://github.com/SupplyMaven-SCR/supplymaven-mcp-server",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://supplymaven.com/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer token with your SupplyMaven API key (get a free key at supplymaven.com/developers)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "supply_chain_risk_assessment",
+      "description": "Global Disruption Index (GDI) — real-time 0-100 composite score measuring supply chain disruption risk across Transportation, Energy, Materials, and Macro pillars. Built from 200+ live data variables, updated every 15 minutes."
+    },
+    {
+      "name": "commodity_price_monitor",
+      "description": "Real-time prices for 31 commodities across energy, metals, agriculture, industrial, and semiconductor materials. Includes 24-hour change percentage and price history."
+    },
+    {
+      "name": "supply_chain_disruption_alerts",
+      "description": "Real-time disruption alerts from global news intelligence — port closures, tariff changes, sanctions, natural disasters, labor strikes, and weather disruptions."
+    },
+    {
+      "name": "manufacturing_output_indicator",
+      "description": "Patent-pending Supply Manufacturing Index (SMI) — detects US manufacturing output changes up to 24 hours before official government reports by analyzing weather-normalized electricity demand across 8 US power grid regions. INVERTED scale: lower = stronger."
+    },
+    {
+      "name": "risk_pillar_breakdown",
+      "description": "Detailed breakdown of GDI by risk category — individual scores for Transportation (30%), Energy (25%), Materials (25%), and Macro (20%) pillars with weights, policy adjustments, and news boost values."
+    },
+    {
+      "name": "port_congestion_monitor",
+      "description": "Real-time port congestion and vessel traffic at 26 major global ports. Vessel counts, congestion scores versus historical baselines, and port status across US, Asian, and European ports."
+    },
+    {
+      "name": "get_action_signals",
+      "description": "Statistically validated leading indicator signals evaluated against live GDI and SMI data. Each signal is a Granger-causal relationship (p<=0.01) with directional accuracy >=55%. Returns ACTIVE, WATCH, or CLEAR status with lag times."
+    },
+    {
+      "name": "get_border_delays",
+      "description": "Real-time commercial border crossing wait times at 80+ US-Mexico and US-Canada ports of entry. Updated every 30 minutes from US Customs and Border Protection. Filter by border or specific crossing."
+    },
+    {
+      "name": "get_chokepoint_traffic",
+      "description": "Real-time vessel traffic at critical maritime chokepoints — Suez Canal, Panama Canal, Strait of Malacca, Strait of Hormuz, Bab el-Mandeb, and other strategic waterways. Congestion scores and vessel counts."
+    },
+    {
+      "name": "get_air_cargo_disruptions",
+      "description": "Air cargo disruption status at 39 US and international freight hub airports. FAA ground delays, ground stops, disruption scores, and traffic collapse detection from FlightAware data."
+    },
+    {
+      "name": "get_trade_policy_impacts",
+      "description": "Active trade policy actions impacting supply chain risk — tariffs, sanctions, export controls, import restrictions. Policies persist and continue to modify GDI risk scores, unlike transient news alerts."
+    },
+    {
+      "name": "get_energy_breakdown",
+      "description": "Comprehensive US energy market data — crude oil prices, natural gas spot (Henry Hub), retail fuel prices, natural gas storage, refinery utilization, petroleum stocks, and import/export trade flows."
+    },
+    {
+      "name": "get_rail_freight_status",
+      "description": "US freight rail performance metrics — train speed, terminal dwell time, cars on line, carloadings, intermodal units, and grain transport rates from STB, AAR, and USDA sources."
+    },
+    {
+      "name": "get_freight_transportation_index",
+      "description": "BTS Transportation Services Index for freight, truck tonnage, rail carloadings, rail intermodal, waterborne freight, and inventory-to-sales ratio for supply chain flow analysis."
+    },
+    {
+      "name": "get_economic_indicators",
+      "description": "Federal Reserve economic data (industrial production, capacity utilization, manufacturing), Producer Price Index, NY Fed Global Supply Chain Pressure Index, and EIA Short-Term Energy Outlook forecasts."
+    },
+    {
+      "name": "get_predictive_signals",
+      "description": "58 validated Granger-causal signals predicting supply chain outcomes 1 week to 6 months ahead. ACTIVE/WATCH/CLEAR status with statistical confidence, lag times, and directional accuracy. Filter by tier, status, or predictor."
+    },
+    {
+      "name": "get_signal_narratives",
+      "description": "Plain-language explanations of signal mechanisms and economic logic for each of 58 predictive signals. Suitable for executive briefings, client reports, and AI agent reasoning chains."
+    },
+    {
+      "name": "get_manufacturing_anomalies",
+      "description": "Electricity demand anomaly detection across 8 US grid regions for early manufacturing shift warnings. Patent-pending weather normalization isolates industrial demand from commercial and residential."
+    },
+    {
+      "name": "get_energy_forecast",
+      "description": "EIA Short-Term Energy Outlook forward-looking projections — crude oil production, natural gas prices, electricity generation, renewable capacity. Actual vs forecast comparison across 1,467 tracked series."
+    },
+    {
+      "name": "get_gdi_trend_analysis",
+      "description": "GDI risk trend direction, velocity, acceleration, and pillar-level momentum over 7/14/30/90-day windows. Detects regime changes and trend reversals before they show in the headline number."
+    },
+    {
+      "name": "get_commodity_volatility_alerts",
+      "description": "Abnormal commodity price movement detection across 31 commodities. Flags unusual 24-hour changes that may signal supply disruptions, demand shifts, or speculative activity."
+    },
+    {
+      "name": "get_port_congestion_trends",
+      "description": "Port congestion trajectory and acceleration versus historical baselines at 26 global ports. Trend direction and velocity — because direction of change matters more than point-in-time score."
+    },
+    {
+      "name": "get_intelligence_briefs",
+      "description": "AI-generated hourly analytical briefs per supply chain dimension — energy, materials, transportation, macro, and manufacturing. Cross-pillar awareness with anti-hallucination safeguards."
+    },
+    {
+      "name": "get_natural_disaster_alerts",
+      "description": "Real-time natural disaster alerts from USGS (earthquakes M5.0+), NOAA (storms/hurricanes), and GDACS (global earthquakes, cyclones, floods, volcanoes). Returns active events with magnitude, severity, coordinates, and affected country."
+    },
+    {
+      "name": "get_corridor_risk",
+      "description": "Risk levels across 10 major ocean freight trade corridors (China-US, Taiwan-US, India-US, China-Europe, Europe-US, Middle East-Europe, Brazil-US). Weakest-link scoring chains ports and chokepoints into end-to-end lane risk. Includes natural disaster proximity boost."
+    },
+    {
+      "name": "get_supply_chain_weekly_brief",
+      "description": "Comprehensive weekly intelligence report — GDI pillar scores, manufacturing output, port congestion, active predictive signals, top disruption events, commodity movements, and key takeaways in a single call."
+    },
+    {
+      "name": "get_weekly_content_package",
+      "description": "Weekly 'Signal of the Week' content package — pre-written, data-verified marketing bundle with Substack article, LinkedIn post, and Twitter thread. Every number traces back to a live data source."
+    },
+    {
+      "name": "get_freight_rate_observations",
+      "description": "Freight rate index observations from news intelligence. Covers BDI, SCFI, WCI, CCFI, HARPEX with direction, magnitude, trade lane, and rate values. Each observation includes confidence score and source URL."
+    },
+    {
+      "name": "get_customs_trade_events",
+      "description": "Customs and trade policy events from news intelligence. Tariff changes, sanctions, export controls, trade agreements. Includes affected countries, products, direction (RESTRICTIVE/LIBERALIZING), and US impact assessment."
+    },
+    {
+      "name": "get_labor_actions",
+      "description": "Labor actions affecting supply chains — strikes, lockouts, slowdowns, contract negotiations. Includes union, employer, location, worker count, affected ports, and status."
+    },
+    {
+      "name": "get_freight_rate_pressure",
+      "description": "Freight rate pressure scores for WCI and SCFI container indices. Z-score vs 52-week baseline mapped to 0-100. Levels: STABLE, ELEVATED, VOLATILE, SURGING, EXTREME. Includes corridor mapping."
+    },
+    {
+      "name": "get_customs_friction_baseline",
+      "description": "Per-country customs friction baseline (0-100) combining port congestion (55%) and trade policy events (45%). 21 countries across 7 regions. Higher = more friction."
+    },
+    {
+      "name": "get_disaster_events",
+      "description": "Active natural disaster events from USGS, NOAA, and GDACS with geographic and type filtering. Complements get_natural_disaster_alerts with region-based filtering and multi-day lookback."
+    },
+    {
+      "name": "get_port_disruption_index",
+      "description": "Port Readiness scores measuring land-side logistics at 7 major US ports. 5-component composite (0-100): rail terminal dwell, vessel congestion, highway incidents, truck availability, and weather. Nodes: LA/LB, NY/NJ, Savannah, Houston, Seattle/Tacoma, El Paso, Laredo."
+    }
+  ]
+}

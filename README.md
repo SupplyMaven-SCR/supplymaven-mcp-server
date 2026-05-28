@@ -66,7 +66,7 @@ const client = await experimental_createMCPClient({
 });
 
 const tools = await client.tools();
-// 24 supply chain intelligence tools ready
+// 34 supply chain intelligence tools ready
 ```
 
 ### Any MCP Client
@@ -78,7 +78,7 @@ const tools = await client.tools();
 
 ---
 
-## Available Tools (24)
+## Available Tools (34)
 
 ### Free Tier — No credit card, get a key instantly
 
@@ -104,6 +104,15 @@ const tools = await client.tools();
 | `get_rail_freight_status` | US freight rail performance — train speed, terminal dwell time, carloadings, intermodal units, and grain transport rates from STB/AAR/USDA. |
 | `get_freight_transportation_index` | BTS Transportation Services Index, truck tonnage, rail carloadings, rail intermodal, waterborne freight, and inventory-to-sales ratio. |
 | `get_economic_indicators` | FRED economic data, Producer Price Index, NY Fed Global Supply Chain Pressure Index, and EIA STEO energy forecasts. |
+| `get_natural_disaster_alerts` | Real-time natural disaster alerts from USGS, NOAA, and GDACS. Earthquakes, hurricanes, floods, volcanoes with severity and coordinates. |
+| `get_corridor_risk` | Risk levels across 10 ocean freight trade corridors. Weakest-link scoring chains ports and chokepoints into end-to-end lane risk. |
+| `get_freight_rate_observations` | Freight rate index observations (BDI, SCFI, WCI, CCFI, HARPEX) with direction, magnitude, and trade lane context. |
+| `get_customs_trade_events` | Customs and trade policy events — tariffs, sanctions, export controls. Direction (RESTRICTIVE/LIBERALIZING) and US impact assessment. |
+| `get_labor_actions` | Labor actions affecting supply chains — strikes, lockouts, slowdowns, contract negotiations with affected ports and status. |
+| `get_freight_rate_pressure` | Freight rate pressure scores for WCI and SCFI. Z-score vs 52-week baseline mapped to 0-100 with corridor mapping. |
+| `get_customs_friction_baseline` | Per-country customs friction baseline (0-100) combining port congestion and trade policy events. 21 countries. |
+| `get_disaster_events` | Active natural disaster events with geographic and type filtering. Region-based filtering and multi-day lookback. |
+| `get_port_disruption_index` | Port Readiness scores for 7 US ports. 5-component composite: rail dwell, vessel congestion, highway incidents, truck availability, weather. |
 
 ### Signal Tier — Enterprise - 25,000 queries/day - includes everything in Pro
 
@@ -118,6 +127,7 @@ const tools = await client.tools();
 | `get_commodity_volatility_alerts` | Abnormal commodity price movement detection across 31 commodities. Flags unusual 24-hour changes that may signal supply disruptions, demand shifts, or speculative activity. |
 | `get_port_congestion_trends` | Port congestion trajectory and acceleration versus historical baselines at 26 global ports. Direction of change matters more than point-in-time score. |
 | `get_intelligence_briefs` | AI-generated hourly analytical briefs per supply chain dimension — energy, materials, transportation, macro, and manufacturing. Cross-pillar awareness with anti-hallucination safeguards. |
+| `get_weekly_content_package` | Weekly 'Signal of the Week' content package — pre-written, data-verified marketing bundle with Substack article, LinkedIn post, and Twitter thread. |
 
 ---
 
@@ -245,8 +255,8 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 | Plan | Price | Queries/Day | Tools |
 |------|-------|-------------|-------|
 | Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
-| Pro | $499/month | 10,000 | 15 tools + Dashboard access, full-resolution data |
-| Signal | Enterprise | 25,000 | All 24 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
+| Pro | $499/month | 10,000 | 24 tools + Dashboard access, full-resolution data |
+| Signal | Enterprise | 25,000 | All 34 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
 
 Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
@@ -264,6 +274,6 @@ Get a free API key instantly at [supplymaven.com/developers](https://supplymaven
 
 ## About
 
-SupplyMaven is built by [Eos Group, LLC](https://supplymaven.com). The platform monitors over 200 data variables in real time, sourced from government agencies (EIA, USDA, CBP, BLS, Federal Reserve, FAA, NOAA), commodity markets, global vessel tracking (AIS/Datalastic), and news intelligence feeds.
+SupplyMaven is built by [SupplyMaven, Inc.](https://supplymaven.com). The platform monitors over 200 data variables in real time, sourced from government agencies (EIA, USDA, CBP, BLS, Federal Reserve, FAA, NOAA), commodity markets, global vessel tracking (AIS/Datalastic), and news intelligence feeds.
 
 *SupplyMaven — Enterprise-grade supply chain intelligence for AI agents.*

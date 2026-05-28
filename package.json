@@ -1,7 +1,7 @@
 {
   "name": "@supplymaven/mcp-server",
-  "version": "1.0.0",
-  "description": "MCP server for SupplyMaven real-time supply chain risk intelligence",
+  "version": "1.1.0",
+  "description": "Real-time supply chain risk intelligence — 34 tools, proprietary indices, predictive signals",
   "main": "index.js",
   "bin": {
     "supplymaven-mcp-server": "index.js"
@@ -22,5 +22,5 @@
     "risk-intelligence",
     "model-context-protocol"
   ],
-  "license": "MIT"
+  "license": "SEE LICENSE IN LICENSE"
 }
