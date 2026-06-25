@@ -243,7 +243,7 @@ Data provided by SupplyMaven | supplymaven.com/validation
 A 0-100 composite score quantifying overall supply chain disruption risk. Combines four weighted pillars — Transportation (30%), Energy (25%), Materials (25%), Macro (20%). Recalculates every 15 minutes. Higher = more risk.
 
 ### Supply Maven Manufacturing Index (SMI)
-A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. Detects manufacturing output changes up to 24 hours before official government reports. Formula: NMS = RMD x (1 - ((CDD x alpha) + (HDD x beta))). Validated against 9 FRED benchmarks with IPMAN correlation of +0.646.
+A **patent-pending** index that measures US manufacturing activity by analyzing weather-normalized electricity demand across 8 power grid regions. Detects manufacturing output changes weeks before official government reports. 
 
 ### Validated Predictive Signals
 58 Granger-causal signals tested at p<=0.01 with directional accuracy >=55%. Each signal has a known lag time (how far ahead it predicts) and is evaluated against live data every 15 minutes. Organized in 3 tiers by statistical confidence.
