@@ -88,7 +88,7 @@ const tools = await client.tools();
 | `commodity_price_monitor` | Real-time prices for 31 commodities across energy, metals, agriculture, industrial, and semiconductor materials. Free tier: 5 key commodities. |
 | `supply_chain_disruption_alerts` | Real-time disruption alerts from global news intelligence — port closures, tariffs, sanctions, weather, labor strikes. Free tier: critical severity only. |
 
-### Pro Tier — $499/month - 10,000 queries/day - includes Dashboard
+### Pro Tier — contact tellme@supplymaven.com - includes Dashboard
 
 | Tool | Description |
 |------|-------------|
@@ -114,7 +114,7 @@ const tools = await client.tools();
 | `get_disaster_events` | Active natural disaster events with geographic and type filtering. Region-based filtering and multi-day lookback. |
 | `get_port_disruption_index` | Port Readiness scores for 7 US ports. 5-component composite: rail dwell, vessel congestion, highway incidents, truck availability, weather. |
 
-### Signal Tier — Enterprise - 25,000 queries/day - includes everything in Pro
+### Signal Tier — Enterprise - includes everything in Pro
 
 | Tool | Description |
 |------|-------------|
@@ -249,14 +249,6 @@ A **patent-pending** index that measures US manufacturing activity by analyzing 
 58 Granger-causal signals tested at p<=0.01 with directional accuracy >=55%. Each signal has a known lag time (how far ahead it predicts) and is evaluated against live data every 15 minutes. Organized in 3 tiers by statistical confidence.
 
 ---
-
-## Pricing
-
-| Plan | Price | Queries/Day | Tools |
-|------|-------|-------------|-------|
-| Free | $0 | 100 | 3 tools (GDI, 5 commodities, critical alerts) |
-| Pro | $499/month | 10,000 | 24 tools + Dashboard access, full-resolution data |
-| Signal | Enterprise | 25,000 | All 34 tools — everything in Pro + predictive signals, anomaly detection, forecasts, trend analysis, volatility alerts, intelligence briefs, weekly briefs |
 
 Get a free API key instantly at [supplymaven.com/developers](https://supplymaven.com/developers)
 
